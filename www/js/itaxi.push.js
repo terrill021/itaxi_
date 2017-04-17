@@ -1,6 +1,6 @@
 angular.module('itaxi.push', [])
 
-.run(function (localStorageService, swal) {
+.run(function (localStorageService, swal, global) {
  
 	//////////////////////////////////////
         var push = PushNotification.init({
@@ -27,7 +27,8 @@ angular.module('itaxi.push', [])
 
         //Eventos 
         push.on('notification', function(data) {
-            
+                    
+            global.getUncashedTrip();
             navigator.notification.alert(
                 data.message,         // message
                 null,                 // callback

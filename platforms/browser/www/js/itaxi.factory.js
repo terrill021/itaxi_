@@ -144,7 +144,12 @@ angular.module('itaxi.factory', [])
 					    loaderBg: (response.data.error)?'#c60000':'#9EC600'  // To change the background
 						});
 		            trip = {};
-		            $state.go('trips');
+		            if(! response.data.error){
+		            	global.startPoint = {};
+	    				global.endPoint = {};
+		            	$state.go('trips');	
+		            }
+		            
 		      	}
 		      	,function errorCallback(response) {
 		        	swal.error("Error", "No se recibio respuesta del servidor")
