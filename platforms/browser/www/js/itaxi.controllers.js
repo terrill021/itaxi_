@@ -23,7 +23,9 @@ angular.module('itaxi.controllers', [])
 	})	
 	.controller('ctrlTrips', function (localStorageService,$rootScope, $scope, $state, global) {
 	    if(!global.verificateSession()){return;}  
+	    
 	    global.getMyTrips();
+	    
 	    $scope.myTrips = global.myTrips;
 	    
 	})

@@ -144,7 +144,7 @@ angular.module('itaxi.factory', [])
 					    loaderBg: (response.data.error)?'#c60000':'#9EC600'  // To change the background
 						});
 		            trip = {};
-		            if(! response.data.error){
+		            if(!response.data.error){
 		            	global.startPoint = {};
 	    				global.endPoint = {};
 		            	$state.go('trips');	
