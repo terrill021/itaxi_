@@ -5,7 +5,7 @@ angular.module('itaxi.push', [])
 	//////////////////////////////////////
         var push = PushNotification.init({
             "android": {
-                "senderID": "938058551807"
+                "senderID": "821347345466"
             },
             "browser": {},
             "ios": {
@@ -26,8 +26,9 @@ angular.module('itaxi.push', [])
             alert("push error = " + e.message);
         });
 
+        //Eventos 
         push.on('notification', function(data) {
-            alert('notification event');
+            alert('notification event' + data.message);
             navigator.notification.alert(
                 data.message,         // message
                 null,                 // callback
