@@ -1,14 +1,7 @@
 
 angular.module('itaxi.controllers', [])
 
-.controller('ctrlAddDriver', function (localStorageService,$rootScope, $scope, $state, global) {
-	  
 
-	    $scope.agregar = function(){
-	        $rootScope.guardando = true;
-	        global.addDriver($scope.driver);
-	    }
-	})
 	.controller('ctrlNewTrip', function (localStorageService,$rootScope, $scope, $state, global) {
 	    
 	    if(!global.verificateSession()){return;}  
@@ -37,7 +30,7 @@ angular.module('itaxi.controllers', [])
 	.controller('ctrlCashTrip', function (localStorageService,$rootScope, $scope, $state, global) {
 	    if(!global.verificateSession()){return;} 
 	    global.getUncashedTrip();
-	    $scope.trip = global.uncashedTrip;  
+	    $scope.trip = $rootScope.uncashedTrip;  
 
 	    $scope.validateEmpty = function(obj){
 	 	   return jQuery.isEmptyObject(obj);
@@ -45,23 +38,14 @@ angular.module('itaxi.controllers', [])
 
 	    $scope.cashTrip = function(trip)  {
 	    	$rootScope.guardando = true;
-	    	if(global.cashTrip(trip))
-	    	{
-	    		alert('ok?')
-	    		$scope.trip = {};
-	    	}
+	    	global.cashTrip($scope.trip);
 	    };
 
 	    
 
 	})
 	.controller('ctrlLogin', function (localStorageService, $rootScope, $scope, $state, global, swal) {
-	    
-	     /* 
-	     	$scope.$on('$ionicView.enter', function(e) {
-  			alert('etre a ctrlLogin')
-  			});
-		*/
+	  
 	    $scope.login = function(){
 	    	$rootScope.guardando = true;
 	    	if ($scope.user.type == 'client') {

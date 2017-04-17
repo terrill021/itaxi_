@@ -9,7 +9,7 @@ angular.module('itaxi.factory', [])
 	    $rootScope.guardando = false;
 	    global.startPoint = {};
 	    global.endPoint = {};
-	    global.uncashedTrip = {};
+	    $rootScope.uncashedTrip = {};
 	    global.myTrips = new Array();
 	    $rootScope.address = '';
 	    var markerId = 0;
@@ -157,7 +157,7 @@ angular.module('itaxi.factory', [])
 		        method: 'post',
 		        cache: false,
 		        headers: {'Content-Type': 'application/json'},
-		        url: 'http://' + ip + ':' + port + '/trips/cash/' + global.uncashedTrip._id,
+		        url: 'http://' + ip + ':' + port + '/trips/cash/' + $rootScope.uncashedTrip._id,
 		        data : {
 		        	duration : 2
 		            }
@@ -180,9 +180,8 @@ angular.module('itaxi.factory', [])
 		           		return false;
 		           } else {
 		           		swal.success("Message", response.data.message);
-		           		global.uncashedTrip = {};
-						$state.go('cashTrip');
-		           		return true;		           
+		           		$rootScope.uncashedTrip = {};		           	
+						//$state.go('cashTrip');		           			           
 		           	}
 		      	}
 		      	,function errorCallback(response) {
@@ -199,7 +198,7 @@ angular.module('itaxi.factory', [])
 		        url: 'http://' + ip + ':' + port + '/trips/uncashed/' +localStorageService.get('sesion')._id,
 			})
 		        .then(function successCallback(response) {
-		        		angular.copy(response.data.trip, global.uncashedTrip);
+		        		angular.copy(response.data.trip, $rootScope.uncashedTrip);
 		       			//Notificación visual
 		        		$.toast({
 					    heading: (response.data.error)? 'Error':'Success',

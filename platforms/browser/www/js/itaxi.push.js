@@ -1,6 +1,6 @@
 angular.module('itaxi.push', [])
 
-.run(function (localStorageService) {
+.run(function (localStorageService, swal) {
  
 	//////////////////////////////////////
         var push = PushNotification.init({
@@ -17,7 +17,6 @@ angular.module('itaxi.push', [])
         });.0
 
         push.on('registration', function(data) {
-            alert(data.registrationId);
             localStorageService.set('pushtoken', data.registrationId);
            
         });
@@ -28,7 +27,7 @@ angular.module('itaxi.push', [])
 
         //Eventos 
         push.on('notification', function(data) {
-            alert('notification event' + data.message);
+            
             navigator.notification.alert(
                 data.message,         // message
                 null,                 // callback
