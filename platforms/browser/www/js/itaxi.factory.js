@@ -130,26 +130,15 @@ angular.module('itaxi.factory', [])
 		            }
 		        })
 		        .then(function successCallback(response) {
-
-		        	swal.success("Message", response.data.message)		
-		            $.toast({
-					    heading: (response.data.error)? 'Error':'Success',
-					    text: response.data.message,
-					    icon: (response.data.error)?'error':'success',
-						position: 'bottom-center',
-						showHideTransition: 'slide',
-						bgColor : (response.data.error)?'#ff0000': '#1663c9',
-					    loader: true,        // Change it to false to disable loader
-					    textColor : 'white',
-					    loaderBg: (response.data.error)?'#c60000':'#9EC600'  // To change the background
-						});
-		            trip = {};
+		        											
 		            if(!response.data.error){
+						swal.success("Message", response.data.message)		
 		            	global.startPoint = {};
 	    				global.endPoint = {};
 		            	$state.go('trips');	
+		            }else{
+		            	swal.error("Message", response.data.message)		
 		            }
-		            
 		      	}
 		      	,function errorCallback(response) {
 		        	swal.error("Error", "No se recibio respuesta del servidor")

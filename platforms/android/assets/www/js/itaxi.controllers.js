@@ -23,16 +23,15 @@ angular.module('itaxi.controllers', [])
 	})	
 	.controller('ctrlTrips', function (localStorageService,$rootScope, $scope, $state, global) {
 	    if(!global.verificateSession()){return;}  
-	    
 	    global.getMyTrips();
-	    
 	    $scope.myTrips = global.myTrips;
 	    
 	})
 	.controller('ctrlCashTrip', function (localStorageService,$rootScope, $scope, $state, global) {
 	    if(!global.verificateSession()){return;} 
+	    
 	    global.getUncashedTrip();
-	    $scope.trip = $rootScope.uncashedTrip;  
+	    //$scope.trip = $rootScope.uncashedTrip;  
 
 	    $scope.validateEmpty = function(obj){
 	 	   return jQuery.isEmptyObject(obj);
@@ -40,10 +39,8 @@ angular.module('itaxi.controllers', [])
 
 	    $scope.cashTrip = function(trip)  {
 	    	$rootScope.guardando = true;
-	    	global.cashTrip($scope.trip);
-	    };
-
-	    
+	    	global.cashTrip(trip);
+	    };    
 
 	})
 	.controller('ctrlLogin', function (localStorageService, $rootScope, $scope, $state, global, swal) {
