@@ -55,8 +55,7 @@ angular.module('itaxi.controllers', [])
 	    	 }
 	    	 else{
 	    	 	swal.warning('Warning', 'Select an user type');
-	    	 }
-	    	
+	    	 }	    	
 	    }
 	})
 	
@@ -95,10 +94,16 @@ angular.module('itaxi.controllers', [])
 			
 	   }
 
-	   function refresh(marker) {
-            $scope.map.control.refresh({latitude: marker.latitude,
-                longitude: marker.longitude});
+	   var refresh = function (marker) {
+            $scope.map.control.refresh({latitude: marker.latitude, longitude: marker.longitude});
         };
+
+        var refreshq = function () {
+            $scope.map.control.refresh({latitude: $scope.marker.coords.latitude, longitude: $scope.marker.coords.longitude});
+        };
+
+
+        $scope.refresh = refreshq;
 
         $rootScope.addAddress = function(address) {
         	
@@ -114,6 +119,7 @@ angular.module('itaxi.controllers', [])
         };
 		//generar unas posiciones por defecto en caso de q el gps se tarde o no funcione
 		$rootScope.map = {center: {latitude: 0, longitude: 0}, control: {}, zoom: 15  };
+		
 		$rootScope.marker = {
 		      id: 0,
 		      coords: {
@@ -201,6 +207,5 @@ angular.module('itaxi.controllers', [])
 	        };
 	        $scope.dynamicMoveCtr++;
 	      }, 2000);
-
 	    }, 1000);
   	});

@@ -1,6 +1,6 @@
 angular.module('itaxi.push', [])
 
-.run(function (localStorageService, global) {
+.run(function (localStorageService, global, $state) {
  
 	//////////////////////////////////////
         var push = PushNotification.init({
@@ -26,19 +26,30 @@ angular.module('itaxi.push', [])
         });
 
         //Eventos 
-        push.on('notification', function(data) {
-            
-            
-            if ($rootScope.drivers) {
-                global.getUncashedTrip();    
-            }        
-            
+        push.on('notification', function(data) {       
+            //Si es un conductor que le actualize la GUI 
+            //para que le aparesca el viaje por cobrar.
+
+
+            //si es cliente que le actuailize la GUI para 
+            //que le apresca cobrado el viaje
+            var callback = function(){
+            if(localStorageService.get('sesion').balance == null){
+                    global.getUncashedTrip();
+                }else{
+                    $state.go('newTrip')
+                }
+            };
+
+            //Mostrar notificacion push en la pantalla
             navigator.notification.alert(
                 data.message,         // message
-                null,                 // callback
+                callback,             // callback
                 data.title,           // title
                 'Ok'                  // buttonName
             );
+
+            
         });
 	////////////////////////////
 })
