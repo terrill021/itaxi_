@@ -129,9 +129,10 @@ angular.module('itaxi.controllers', [])
 		      options: { draggable: true, animation :1 },
 		      events: {
 		        dragend: function (marker, eventName, args) {
-		          $log.log('marker dragend');
+		          $log.log('marker dragend');				  
 		          $scope.actualLatitude = marker.getPosition().lat();
 		          $scope.actualLongitude = marker.getPosition().lng();
+		          $scope.map.control.refresh({latitude:$scope.actualLatitude , longitude: $scope.actualLongitude});
 		          $log.log($scope.actualLatitude);
 		          $log.log($scope.actualLongitude);
 
@@ -150,8 +151,7 @@ angular.module('itaxi.controllers', [])
 			
 			$scope.actualLatitude = position.coords.latitude;
 			$scope.actualLongitude = position.coords.longitude;
-			$rootScope.map.center.longitude = position.coords.longitude;
-			$rootScope.map.center.latitude = position.coords.latitude;
+			$scope.map.control.refresh({latitude: $scope.actualLatitude, longitude:$scope.actualLongitude});
 
 			$scope.options = {scrollwheel: false};
 		    $scope.coordsUpdates = 0;
