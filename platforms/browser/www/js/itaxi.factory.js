@@ -25,6 +25,7 @@ angular.module('itaxi.factory', [])
 	    }
 	    //Iniciar sesion conductores
 	    global.loginDriver = function(user){
+	    	$rootScope.cargando = true;
 		        $http({
 		            method: 'post',
 		            cache: false,
@@ -37,7 +38,7 @@ angular.module('itaxi.factory', [])
 		            }
 		        })
 		        .then(function successCallback(response) {
-		            console.log(response);
+		            $rootScope.cargando = false;
 		            $rootScope.cargando = false;
           			if (response.data.user == null) {
           				swal.warning("Message", "user not found")
@@ -50,12 +51,14 @@ angular.module('itaxi.factory', [])
           			}
 		      }
 		      ,function errorCallback(response) {
+		      	$rootScope.cargando = false;
 		      	swal.error("Error", "No se recibio respuesta del servidor")
 		    });
     	};
 
     	//Iniciar sesion clientes
 	    global.loginClient = function(user){
+		        $rootScope.cargando = true;
 		        $http({
 		            method: 'post',
 		            cache: false,
@@ -68,7 +71,6 @@ angular.module('itaxi.factory', [])
 		            }
 		        })
 		        .then(function successCallback(response) {
-		            console.log(response);
 		            $rootScope.cargando = false;
           			if (response.data.user == null) {
           				swal.warning("Message", "user not found")
@@ -83,12 +85,14 @@ angular.module('itaxi.factory', [])
           			}
 		      }
 		      ,function errorCallback(response) {
+		      	$rootScope.cargando = false;
 		      	swal.error("Error", "No se recibio respuesta del servidor")
 		    });
     	};
 
     	//obtener mis viajes (Cliente)
     	global.getMyTrips = function() {
+		        $rootScope.cargando = true;
 		        $http({
 		            method: 'GET',
 		            cache: false,
@@ -96,7 +100,7 @@ angular.module('itaxi.factory', [])
 		            url: 'http://' + ip + ':' + port + '/trips/' + localStorageService.get('sesion')._id,
 		        })
 		        .then(function successCallback(response) {
-		            console.log(response);
+		            $rootScope.cargando = false;
 		            angular.copy(response.data.trips, global.myTrips);
 		            $.toast({
 					    heading: (response.data.error)? 'Error':'Success',
@@ -117,6 +121,7 @@ angular.module('itaxi.factory', [])
 
     	//Crear nuevo viaje
     	global.newTrip = function(trip){
+		    $rootScope.cargando = true;
 		    $http({
 		        method: 'post',
 		        cache: false,
@@ -130,7 +135,7 @@ angular.module('itaxi.factory', [])
 		            }
 		        })
 		        .then(function successCallback(response) {
-		        											
+					$rootScope.cargando = false;		        												
 		            if(!response.data.error){
 						swal.success("Message", response.data.message)		
 		            	global.startPoint = {};
@@ -141,12 +146,14 @@ angular.module('itaxi.factory', [])
 		            }
 		      	}
 		      	,function errorCallback(response) {
+		        	$rootScope.cargando = false;
 		        	swal.error("Error", "No se recibio respuesta del servidor")
 		    });
     	};
     	
     	//Cobrar un  viaje (Conductor)
     	global.cashTrip = function(trip){
+		    $rootScope.cargando = true;
 		    $http({
 		        method: 'post',
 		        cache: false,
@@ -179,12 +186,14 @@ angular.module('itaxi.factory', [])
 		           	}
 		      	}
 		      	,function errorCallback(response) {
+		       		$rootScope.cargando = false;
 		       		swal.error("Error", "No se recibio respuesta del servidor")
 		    });
     	};
 
     	//obtener viaje por cobrar (Conductor)
     	global.getUncashedTrip = function() {
+		    $rootScope.cargando = true;
 		    $http({
 		        method: 'GET',
 		        cache: false,
@@ -192,6 +201,7 @@ angular.module('itaxi.factory', [])
 		        url: 'http://' + ip + ':' + port + '/trips/uncashed/' +localStorageService.get('sesion')._id,
 			})
 		        .then(function successCallback(response) {
+		        		$rootScope.cargando = false;
 		        		angular.copy(response.data.trip, $rootScope.uncashedTrip);
 		       			//Notificación visual
 		        		$.toast({
@@ -207,6 +217,7 @@ angular.module('itaxi.factory', [])
 						});		        		
 		      	}
 		      	,function errorCallback(response) {
+		      		$rootScope.cargando = false;
 		        	swal.error("Error", "No se recibio respuesta del servidor")
 		    });
     	};
