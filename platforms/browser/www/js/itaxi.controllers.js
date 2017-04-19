@@ -1,7 +1,6 @@
 
 angular.module('itaxi.controllers', [])
 
-
 	.controller('ctrlNewTrip', function (localStorageService,$rootScope, $scope, $state, global) {
 	    
 	    if(!global.verificateSession()){return;}  
