@@ -1,7 +1,7 @@
 /* Create the sweetAlert Service singleton */
 
 
-angular.module('app', ['itaxi.push','itaxi.services', 'itaxi.factory', 'itaxi.controllers', 'ui.router','LocalStorageModule', 'uiGmapgoogle-maps'])
+angular.module('app', ['itaxi.push', 'itaxi.config', 'itaxi.services', 'itaxi.factory', 'itaxi.controllers', 'ui.router','LocalStorageModule', 'uiGmapgoogle-maps'])
 	
 	.config(function ($stateProvider, $urlRouterProvider, localStorageServiceProvider) {
 		

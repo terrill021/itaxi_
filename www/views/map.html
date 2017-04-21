@@ -16,13 +16,10 @@
         <div class="row">
             <div class="col s12">
 
-            <script id="searchbox.tpl.html" type="text/ng-template">
-              <input type="text" placeholder="Search">
-            </script>
             
                 <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" control="map.control">
                     
-                    <ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id">
+                    <ui-gmap-marker coords="map.center" options="marker.options" events="marker.events" idkey="marker.id">
                     
                     </ui-gmap-marker>
 

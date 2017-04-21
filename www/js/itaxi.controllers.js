@@ -63,7 +63,6 @@ angular.module('itaxi.controllers', [])
 
 	   $rootScope.searchDirection = function(){
 	   		var swal = window.swal;
-
 	   		swal({   
             title: "What address are you looking for?",   
             text: "Write where you want to go",   
@@ -73,7 +72,7 @@ angular.module('itaxi.controllers', [])
             animation: "slide-from-top",   
             inputPlaceholder: "523 South Irving StBuilding 3 Springfield, MA 01234",
             confirmButtonText: "Search",
-            cancelButtonText: "Cancel" 
+            cancelButtonText: "Cancel"
         }, function(inputValue){
 
 	            if (inputValue === false) return false;      
@@ -122,8 +121,8 @@ angular.module('itaxi.controllers', [])
 		$rootScope.marker = {
 		      id: 0,
 		      coords: {
-		        latitude: 0,
-		        longitude: 0
+		        latitude: $rootScope.map.center.latitude,
+		        longitude: $rootScope.map.center.longitude
 		      },
 		      options: { draggable: true, animation :1 },
 		      events: {
