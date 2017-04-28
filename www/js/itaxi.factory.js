@@ -269,13 +269,17 @@ angular.module('itaxi.factory', [])
     	}
 
     	global.createByCurrentLocation = function (successCallback) {
+			$rootScope.cargando = true;
+
 	        if (navigator.geolocation) {
 	            navigator.geolocation.getCurrentPosition(function (position) {
 	                var marker = create(position.coords.latitude, position.coords.longitude);
-	                invokeSuccessCallback(successCallback, marker);
+					$rootScope.cargando = false;
+					invokeSuccessCallback(successCallback, marker);
 	            });
 	        } else {
-	            swal.error("Error", "No se recibio respuesta del servidor")
+				$rootScope.cargando = false;
+				swal.error("Error", "No se recibio respuesta del servidor")
 	        }
     	}
 
